@@ -8,7 +8,7 @@ if(isset($_GET['guardar'])){
 			      <strong>Lo Sentimos!</strong> Se presento un error al guardar el registro.
 			  </div>";
 	//tomamos los parametros para almacenar la data
-  $nombreTipo  = $db->quote($_GET['unidadmedida']);
+  $nombreTipo  = $db->quote($_GET['nombreTipo']);
   $usuarioc = $_SESSION['id'];
 
   $query = "INSERT INTO unidadmedida(unidadMedida, fechaCreacion, usuarioCreacion) values($nombreTipo, NOW(),'$usuarioc')";
@@ -79,7 +79,7 @@ if(isset($_GET['guardar'])){
                                         <tr>
                                             <th>#</th>
                                             <th>Unidad de medida</th>
-                                            
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -145,7 +145,7 @@ if(isset($_GET['editar'])){
                                         </div>
                                         <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                                             <div class="nk-int-st">
-                                                <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Unidad de medida" value="<?php echo $datos->nombreTipo;?>">
+                                                <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Unidad de medida" value="<?php echo $datos->unidadMedida;?>">
                                                 <input type="hidden" name="id" id="id" value="<?php echo $datos->id;?>">
                                             </div>
                                         </div>
@@ -224,7 +224,7 @@ if(isset($_GET['actualizar'])){
 			  </div>";
 	//tomamos los parametros para almacenar la data
 	$id = $db->quote($_GET['id']);$nid =($_GET['id']);$usuarioc = $_SESSION['id'];
-  $nombreTipo = $db->quote($_GET['unidadMedida']);
+  $nombreTipo = $db->quote($_GET['nombreTipo']);
   $usuarioc = $_SESSION['id'];
 
 	$query = "

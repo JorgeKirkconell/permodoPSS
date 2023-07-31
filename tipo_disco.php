@@ -61,7 +61,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Tipo de disco</th>
-                                            <th>Observaciones</th>
+                                            <th>Descripción</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>

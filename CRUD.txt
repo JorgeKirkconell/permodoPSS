@@ -1,0 +1,17 @@
+activoinactivo			CRUD LISTO
+colaboradores			CRUD LISTO
+detallecotizaciones		
+equipodisco
+equipos				FORM LISTO 	FALTA CRUD
+estadocotizaciones		LISTO
+mantenimientos			
+ordenesCompra			
+prestamos
+solicitudes
+tipocargos			CRUD LISTO
+tipodisco			CRUD LISTO
+tipomantenimientos		CRUD LISTO
+tiporam				CRUD LISTO
+unidadmedida			CRUD LISTO
+usuarios			CRUD LISTO
+vitacora			CRUD LISTO

@@ -61,7 +61,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Tipo de RAM</th>
-                                            <th>Observaciones</th>
+                                            <th>Descripción</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -105,7 +105,7 @@
                   //alert("AGREGANDO usuario");
                     var url = "tipo_ram_ajax.php";
                         url += "?guardar=1";
-                        url += "&nombreTipo=" + document.getElementById("tipo").value;
+                        url += "&nombreTipo=" + document.getElementById("nombreTipo").value;
                         url += "&descripcion=" + document.getElementById("descripcion").value;
                         //url += "&impuesto=" + document.getElementById("impuesto").value;
 
@@ -129,7 +129,7 @@
                     var url = "tipo_ram_ajax.php";
                         url += "?actualizar=1";
                         url += "&id=" + document.getElementById("id").value;
-                        url += "&nombreTipo=" + document.getElementById("tipo").value;
+                        url += "&nombreTipo=" + document.getElementById("nombreTipo").value;
                         url += "&descripcion=" + document.getElementById("descripcion").value;
 
                         //alert(url);

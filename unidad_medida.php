@@ -66,7 +66,7 @@
                                         ?>
                                         <tr class="">
                                             <td><?php echo $n;?></td>
-                                            <td><?php echo $row["unidadmedida"];?></td>
+                                            <td><?php echo $row["unidadMedida"];?></td>
                                             <td>
                                                 
                                 <a class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg" title="Editar " onclick="editar_nombreTipo(<?php echo $row['id'];?>);"><i class="notika-icon notika-edit"></i></a>      
@@ -91,7 +91,7 @@
                   
                     var url = "unidad_medida_ajax.php";
                         url += "?guardar=1";
-                        url += "&nombreTipo=" + document.getElementById("unidadMedida").value;
+                        url += "&nombreTipo=" + document.getElementById("nombreTipo").value;
                         //url += "&impuesto=" + document.getElementById("impuesto").value;
 
                         //alert(url);
@@ -115,7 +115,7 @@
                     var url = "unidad_medida_ajax.php";
                         url += "?actualizar=1";
                         url += "&id=" + document.getElementById("id").value;
-                        url += "&nombreTipo=" + document.getElementById("unidadMedida").value;
+                        url += "&nombreTipo=" + document.getElementById("nombreTipo").value;
                         
 
                         //alert(url);

@@ -226,6 +226,42 @@ function arriba(){
                                     </div>
                                 </div>
                             </li>
+
+                            <li class="nav-item nc-al"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-alarm"></i></span><!--<div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>5</span></div>--></a>
+                                <div role="menu" class="dropdown-menu message-dd notification-dd animated zoomIn">
+                                    <div class="hd-mg-tt">
+                                        <h2>Configuración del sistema</h2>
+                                    </div>
+                                    <div class="hd-message-info">
+                                        <a href="inicio.php?modulo=logout">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Cerrar sesión</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                        <div class="hd-message-info">
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Cambiar contraseña</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                        <div class="hd-message-info">
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Ayuda</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                </div>
+                            </li>
                             <!--<li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-menus"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>2</span></div></a>
                                 <div role="menu" class="dropdown-menu message-dd task-dd animated zoomIn">
                                     <div class="hd-mg-tt">
@@ -556,6 +592,17 @@ function arriba(){
                                 </li>
                                 <li><a href="inicio.php?modulo=unidadMedida">Unidades de medida</a>
                                 </li>
+                                </li>
+                                <li><a href="inicio.php?modulo=colaborador">Colaboradores</a>
+                                </li>
+                                <li><a href="inicio.php?modulo=usuarios">Usuarios</a>
+                                </li>
+                                <li><a href="inicio.php?modulo=equipos">Equipos</a>
+                                </li>
+                                <li><a href="inicio.php?modulo=cotizaciones">Cotizaciones</a>
+                                </li>
+                                <li><a href="inicio.php?modulo=solicitudes">Solicitudes</a>
+                                </li>
                                 <li><a href="form-elements.html">Form Elements</a>
                                 </li>
                                 <li><a href="form-components.html">Form Components</a>
@@ -566,7 +613,7 @@ function arriba(){
                         </div>
                         <div id="Appviews" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                            <li><a href="bitacora.php">Logs del sistema</a>
+                            <li><a href="inicio.php?modulo=bitacora">Logs del sistema</a>
                                 </li>
                                 <li><a href="notification.html">Notifications</a>
                                 </li>

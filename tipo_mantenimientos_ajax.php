@@ -10,10 +10,10 @@ if(isset($_GET['guardar'])){
 	//tomamos los parametros para almacenar la data
   $nombreTipo  = $db->quote($_GET['nombreTipo']);
 	$descripcion  = $db->quote($_GET['descripcion']);
-	$activo = $db->quote($_GET['activo']);
+	
   $usuarioc = $_SESSION['id'];
 
-  $query = "INSERT INTO tiporam(tipo, descripcion, fechaCreacion, usuarioCreacion) values($nombreTipo, $descripcion, NOW(),'$usuarioc')";
+  $query = "INSERT INTO tipomantenimientos(tipo, descripcion, fechaCreacion, usuarioCreacion) values($nombreTipo, $descripcion, NOW(),'$usuarioc')";
 
   //echo $query;
 
@@ -22,7 +22,7 @@ if(isset($_GET['guardar'])){
     $ultimo=0;
     $ultimo = $db->lastInsertId();
     if($ultimo>0){
-    	/*$query = $db->prepare("SELECT * from tiporam where id = '$ultimo';");
+    	/*$query = $db->prepare("SELECT * from tipomantenimientos where id = '$ultimo';");
     	$query->execute();
     	$datos = $query->fetch(PDO::FETCH_OBJ);*/
     	$mensaje="<div class=\"alert alert-success\" role=\"alert\">
@@ -46,7 +46,7 @@ if(isset($_GET['guardar'])){
                                         </div>
                                         <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                                             <div class="nk-int-st">
-                                                <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Nombre del tipo de mantenimiento" required>
+                                                <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Tipo de mantenimiento" required>
                                             </div>
                                         </div>
                                     </div>
@@ -87,15 +87,15 @@ if(isset($_GET['guardar'])){
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="normal-table-list">
                             <div class="basic-tb-hd">
-                                <h2>Tipos de Cargos Creados</h2>
-                                <p>Tipos de Cargos creados en el Sistema al día de hoy</p>
+                                <h2>Tipos de mantenimientos Creados</h2>
+                                <p>Tipos de mantenimientos creados en el Sistema al día de hoy</p>
                             </div>
                             <div class="bsc-tbl">
                                 <table class="table table-sc-ex table-hover">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Tipo de Usuario</th>
+                                            <th>Tipo de mantenimiento</th>
                                             <th>Descripcion</th>
                                             
                                             <th>Acciones</th>
@@ -103,7 +103,7 @@ if(isset($_GET['guardar'])){
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $consulta = "SELECT * FROM tiporam";
+                                            $consulta = "SELECT * FROM tipomantenimientos";
                                             //echo $consulta;
                                             $consulta = $db->prepare($consulta);
                                             //$consulta->bindValue(':activo',1);
@@ -116,13 +116,13 @@ if(isset($_GET['guardar'])){
                                         ?>
                                         <tr class="">
                                             <td><?php echo $n;?></td>
-                                            <td><?php echo $row["nombreTipo"];?></td>
+                                            <td><?php echo $row["tipo"];?></td>
                                             <td><?php echo $row["descripcion"];?></td>
-                                            <td><?php echo traduce_id($row["activo"],"activoinactivo", "estado");?></td>
+                                            
                                             <td>
                                                 
                                 <a class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg" title="Editar " onclick="editar_nombreTipo(<?php echo $row['id'];?>);"><i class="notika-icon notika-edit"></i></a>                            
-                                <a class="btn btn-warning cyan-icon-notika btn-reco-mg btn-button-mg" title="Activar / Desactivar" onclick="activar_nombreTipo(<?php echo $row['id'].",".$row['activo'];?>);"><i class="notika-icon notika-checked"></i></a>
+                               
                                 <a class="btn btn-danger cyan-icon-notika btn-reco-mg btn-button-mg" title="Eliminar" onclick="eliminar_nombreTipo(<?php echo $row['id'];?>);" ><i class="notika-icon notika-close"></i></a>
                                             </td>
                                         </tr>  
@@ -144,7 +144,7 @@ if(isset($_GET['editar'])){
         </div>";
 	//tomamos los parametros para almacenar la data
 	$id = $db->quote($_GET['id']);$nid = ($_GET['id']);$usuarioc = $_SESSION['id'];
-	$query = $db->prepare("SELECT * from tiporam where id = $id;");
+	$query = $db->prepare("SELECT * from tipomantenimientos where id = $id;");
 	$query->execute();
 	$datos = $query->fetch(PDO::FETCH_OBJ);
 //}
@@ -163,7 +163,7 @@ if(isset($_GET['editar'])){
                                         </div>
                                         <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                                             <div class="nk-int-st">
-                                                <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Nombre del tipo de mantenimiento" value="<?php echo $datos->nombreTipo;?>">
+                                                <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Tipo de mantenimiento" value="<?php echo $datos->tipo;?>">
                                                 <input type="hidden" name="id" id="id" value="<?php echo $datos->id;?>">
                                             </div>
                                         </div>
@@ -184,20 +184,7 @@ if(isset($_GET['editar'])){
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-example-int form-horizental mg-t-15">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-                                            <label class="hrzn-fm">Activo</label>
-                                        </div>
-                                        <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
-                                            <div class="bootstrap-select fm-cmp-mg">
-                                                <?php llena_combo("activo", "activoinactivo", "estado",$datos->activo);?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="form-example-int mg-t-15">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
@@ -216,15 +203,15 @@ if(isset($_GET['editar'])){
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="normal-table-list">
                             <div class="basic-tb-hd">
-                                <h2>Tipos de Cargos Creados</h2>
-                                <p>Tipos de Cargos creados en el Sistema al día de hoy</p>
+                                <h2>Tipos de mantenimientos Creados</h2>
+                                <p>Tipos de mantenimientos creados en el Sistema al día de hoy</p>
                             </div>
                             <div class="bsc-tbl">
                                 <table class="table table-sc-ex table-hover">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Tipo de Usuario</th>
+                                            <th>Tipo de mantenimiento</th>
                                             <th>Descripcion</th>
                                         
                                             <th>Acciones</th>
@@ -232,7 +219,7 @@ if(isset($_GET['editar'])){
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $consulta = "SELECT * FROM tiporam";
+                                            $consulta = "SELECT * FROM tipomantenimientos";
                                             //echo $consulta;
                                             $consulta = $db->prepare($consulta);
                                             //$consulta->bindValue(':activo',1);
@@ -245,13 +232,13 @@ if(isset($_GET['editar'])){
                                         ?>
                                         <tr class="">
                                             <td><?php echo $n;?></td>
-                                            <td><?php echo $row["nombreTipo"];?></td>
+                                            <td><?php echo $row["tipo"];?></td>
                                             <td><?php echo $row["descripcion"];?></td>
-                                            <td><?php echo traduce_id($row["activo"],"activoinactivo", "estado");?></td>
+                                            
                                             <td>
                                                 
                                 <a class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg" title="Editar " onclick="editar_nombreTipo(<?php echo $row['id'];?>);"><i class="notika-icon notika-edit"></i></a>                            
-                                <a class="btn btn-warning cyan-icon-notika btn-reco-mg btn-button-mg" title="Activar / Desactivar" onclick="activar_nombreTipo(<?php echo $row['id'].",".$row['activo'];?>);"><i class="notika-icon notika-checked"></i></a>
+                               
                                 <a class="btn btn-danger cyan-icon-notika btn-reco-mg btn-button-mg" title="Eliminar" onclick="eliminar_nombreTipo(<?php echo $row['id'];?>);" ><i class="notika-icon notika-close"></i></a>
                                             </td>
                                         </tr>  
@@ -273,14 +260,13 @@ if(isset($_GET['actualizar'])){
 	$id = $db->quote($_GET['id']);$nid =($_GET['id']);$usuarioc = $_SESSION['id'];
   $nombreTipo = $db->quote($_GET['nombreTipo']);
 	$descripcion = $db->quote($_GET['descripcion']);
-	$activo = $db->quote($_GET['activo']);
+	
   $usuarioc = $_SESSION['id'];
 
 	$query = "
-		UPDATE tiporam set
-    nombreTipo = $nombreTipo,
+		UPDATE tipomantenimientos set
+    tipo = $nombreTipo,
 		descripcion = $descripcion,
-		activo = $activo, 
     fechaEdicion = NOW(),
     usuarioEdicion = $usuarioc
 		where id = $id;
@@ -291,7 +277,7 @@ if(isset($_GET['actualizar'])){
     $query->execute();
     $filas = $query->rowCount();
     if($filas>0){
-    	$query = $db->prepare("SELECT * from tiporam where id = $id;");
+    	$query = $db->prepare("SELECT * from tipomantenimientos where id = $id;");
     	$query->execute();
     	$datos = $query->fetch(PDO::FETCH_OBJ);
     	$mensaje="<div class=\"alert alert-success\" role=\"alert\">
@@ -316,7 +302,7 @@ if(isset($_GET['actualizar'])){
                                     </div>
                                     <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                                         <div class="nk-int-st">
-                                            <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Nombre del tipo de mantenimiento" required>
+                                            <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Tipo de mantenimiento" required>
                                         </div>
                                     </div>
                                 </div>
@@ -365,7 +351,7 @@ if(isset($_GET['actualizar'])){
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Tipo de Usuario</th>
+                                        <th>Tipo de mantenimiento</th>
                                         <th>Descripcion</th>
                                         
                                         <th>Acciones</th>
@@ -373,7 +359,7 @@ if(isset($_GET['actualizar'])){
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $consulta = "SELECT * FROM tiporam";
+                                        $consulta = "SELECT * FROM tipomantenimientos";
                                         //echo $consulta;
                                         $consulta = $db->prepare($consulta);
                                         //$consulta->bindValue(':activo',1);
@@ -386,13 +372,13 @@ if(isset($_GET['actualizar'])){
                                     ?>
                                     <tr class="">
                                         <td><?php echo $n;?></td>
-                                        <td><?php echo $row["nombreTipo"];?></td>
+                                        <td><?php echo $row["tipo"];?></td>
                                         <td><?php echo $row["descripcion"];?></td>
-                                        <td><?php echo traduce_id($row["activo"],"activoinactivo", "estado");?></td>
+                                        
                                         <td>
                                             
                             <a class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg" title="Editar " onclick="editar_nombreTipo(<?php echo $row['id'];?>);"><i class="notika-icon notika-edit"></i></a>                            
-                            <a class="btn btn-warning cyan-icon-notika btn-reco-mg btn-button-mg" title="Activar / Desactivar" onclick="activar_nombreTipo(<?php echo $row['id'].",".$row['activo'];?>);"><i class="notika-icon notika-checked"></i></a>
+                           
                             <a class="btn btn-danger cyan-icon-notika btn-reco-mg btn-button-mg" title="Eliminar" onclick="eliminar_nombreTipo(<?php echo $row['id'];?>);" ><i class="notika-icon notika-close"></i></a>
                                         </td>
                                     </tr>  
@@ -414,7 +400,7 @@ if(isset($_GET['activar'])){
         </div>";
 	//tomamos los parametros para almacenar la data
 	$id = $db->quote($_GET['id']);$nid =($_GET['id']);$usuarioc = $_SESSION['id'];
-	$query = $db->prepare("UPDATE tiporam set activo = 1 where id = $id;");
+	$query = $db->prepare("UPDATE tipomantenimientos set activo = 1 where id = $id;");
 	$query->execute();
 
       $mensaje="<div class=\"alert alert-success\" role=\"alert\">
@@ -439,7 +425,7 @@ if(isset($_GET['activar'])){
                                     </div>
                                     <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                                         <div class="nk-int-st">
-                                            <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Nombre del tipo de mantenimiento" required>
+                                            <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Tipo de mantenimiento" required>
                                         </div>
                                     </div>
                                 </div>
@@ -488,7 +474,7 @@ if(isset($_GET['activar'])){
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Tipo de Usuario</th>
+                                        <th>Tipo de mantenimiento</th>
                                         <th>Descripcion</th>
                                         
                                         <th>Acciones</th>
@@ -496,7 +482,7 @@ if(isset($_GET['activar'])){
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $consulta = "SELECT * FROM tiporam";
+                                        $consulta = "SELECT * FROM tipomantenimientos";
                                         //echo $consulta;
                                         $consulta = $db->prepare($consulta);
                                         //$consulta->bindValue(':activo',1);
@@ -509,13 +495,13 @@ if(isset($_GET['activar'])){
                                     ?>
                                     <tr class="">
                                         <td><?php echo $n;?></td>
-                                        <td><?php echo $row["nombreTipo"];?></td>
+                                        <td><?php echo $row["tipo"];?></td>
                                         <td><?php echo $row["descripcion"];?></td>
-                                        <td><?php echo traduce_id($row["activo"],"activoinactivo", "estado");?></td>
+                                        
                                         <td>
                                             
                             <a class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg" title="Editar " onclick="editar_nombreTipo(<?php echo $row['id'];?>);"><i class="notika-icon notika-edit"></i></a>                            
-                            <a class="btn btn-warning cyan-icon-notika btn-reco-mg btn-button-mg" title="Activar / Desactivar" onclick="activar_nombreTipo(<?php echo $row['id'].",".$row['activo'];?>);"><i class="notika-icon notika-checked"></i></a>
+                           
                             <a class="btn btn-danger cyan-icon-notika btn-reco-mg btn-button-mg" title="Eliminar" onclick="eliminar_nombreTipo(<?php echo $row['id'];?>);" ><i class="notika-icon notika-close"></i></a>
                                         </td>
                                     </tr>  
@@ -535,9 +521,9 @@ if(isset($_GET['desactivar'])){
         </div>";
   //tomamos los parametros para almacenar la data
   $id = $db->quote($_GET['id']);$nid =($_GET['id']);$usuarioc = $_SESSION['id'];
-  $query = $db->prepare("UPDATE tiporam set activo = 2 where id = $id;");
+  $query = $db->prepare("UPDATE tipomantenimientos set activo = 2 where id = $id;");
   $query->execute();
-  $query = $db->prepare("SELECT * FROM tiporam where id = $id;");
+  $query = $db->prepare("SELECT * FROM tipomantenimientos where id = $id;");
   $query->execute();
   $datos = $query->fetch(PDO::FETCH_OBJ);
 
@@ -564,7 +550,7 @@ if(isset($_GET['desactivar'])){
                                     </div>
                                     <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                                         <div class="nk-int-st">
-                                            <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Nombre del tipo de mantenimiento" required>
+                                            <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Tipo de mantenimiento" required>
                                         </div>
                                     </div>
                                 </div>
@@ -613,7 +599,7 @@ if(isset($_GET['desactivar'])){
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Tipo de Usuario</th>
+                                        <th>Tipo de mantenimiento</th>
                                         <th>Descripcion</th>
                                         
                                         <th>Acciones</th>
@@ -621,7 +607,7 @@ if(isset($_GET['desactivar'])){
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $consulta = "SELECT * FROM tiporam";
+                                        $consulta = "SELECT * FROM tipomantenimientos";
                                         //echo $consulta;
                                         $consulta = $db->prepare($consulta);
                                         //$consulta->bindValue(':activo',1);
@@ -634,13 +620,13 @@ if(isset($_GET['desactivar'])){
                                     ?>
                                     <tr class="">
                                         <td><?php echo $n;?></td>
-                                        <td><?php echo $row["nombreTipo"];?></td>
+                                        <td><?php echo $row["tipo"];?></td>
                                         <td><?php echo $row["descripcion"];?></td>
-                                        <td><?php echo traduce_id($row["activo"],"activoinactivo", "estado");?></td>
+                                        
                                         <td>
                                             
                             <a class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg" title="Editar " onclick="editar_nombreTipo(<?php echo $row['id'];?>);"><i class="notika-icon notika-edit"></i></a>                            
-                            <a class="btn btn-warning cyan-icon-notika btn-reco-mg btn-button-mg" title="Activar / Desactivar" onclick="activar_nombreTipo(<?php echo $row['id'].",".$row['activo'];?>);"><i class="notika-icon notika-checked"></i></a>
+                           
                             <a class="btn btn-danger cyan-icon-notika btn-reco-mg btn-button-mg" title="Eliminar" onclick="eliminar_nombreTipo(<?php echo $row['id'];?>);" ><i class="notika-icon notika-close"></i></a>
                                         </td>
                                     </tr>  
@@ -661,7 +647,7 @@ if(isset($_GET['eliminar'])){
         </div>";
   //tomamos los parametros para almacenar la data
   $id = $db->quote($_GET['id']);$nid =($_GET['id']);$usuarioc = $_SESSION['id'];
-  $query = $db->prepare("DELETE FROM tiporam where id = $id;");
+  $query = $db->prepare("DELETE FROM tipomantenimientos where id = $id;");
   $query->execute();
   //$datos = $query->fetch(PDO::FETCH_OBJ);
 
@@ -689,7 +675,7 @@ if(isset($_GET['eliminar'])){
                                     </div>
                                     <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                                         <div class="nk-int-st">
-                                            <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Nombre del tipo de mantenimiento" required>
+                                            <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Tipo de mantenimiento" required>
                                         </div>
                                     </div>
                                 </div>
@@ -738,7 +724,7 @@ if(isset($_GET['eliminar'])){
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Tipo de Usuario</th>
+                                        <th>Tipo de mantenimiento</th>
                                         <th>Descripcion</th>
                                         
                                         <th>Acciones</th>
@@ -746,7 +732,7 @@ if(isset($_GET['eliminar'])){
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $consulta = "SELECT * FROM tiporam";
+                                        $consulta = "SELECT * FROM tipomantenimientos";
                                         //echo $consulta;
                                         $consulta = $db->prepare($consulta);
                                         //$consulta->bindValue(':activo',1);
@@ -759,7 +745,7 @@ if(isset($_GET['eliminar'])){
                                     ?>
                                     <tr class="">
                                         <td><?php echo $n;?></td>
-                                        <td><?php echo $row["nombreTipo"];?></td>
+                                        <td><?php echo $row["tipo"];?></td>
                                         <td><?php echo $row["descripcion"];?></td>
                                         <td>
                                             

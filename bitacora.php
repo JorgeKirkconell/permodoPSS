@@ -1,37 +1,28 @@
 <div id="div_cambiante">
-<div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="form-example-wrap mg-t-30">
-                            <div class="cmp-tb-hd cmp-int-hd">
-                                <h2>Registros del sistema</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </br>
+
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="normal-table-list">
                             <div class="basic-tb-hd">
                                 <h2>Registros del sistema</h2>
-                                <p>Registros del sistema creados al día de hoy</p>
+                                <p>Registros del sistema realizados al día de hoy</p>
                             </div>
                             <div class="bsc-tbl">
                                 <table class="table table-sc-ex table-hover">
                                     <thead>
                                         <tr>
                                         <th>#</th>
-                                            <th>Usuarios</th>
+                                        <th>Fecha de acción</th>
+                                            <th>Usuario</th>
                                             <th>Entidad</th>
                                             <th>Identificador</th>
                                             <th>Acción</th>
-                                            <th>Fecha</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                             include "conexion.php";
-                                            include "funciones.php";
                                             $consulta = "SELECT * FROM vitacora";
                                             //echo $consulta;
                                             $consulta = $db->prepare($consulta);
@@ -46,11 +37,12 @@
                                         ?>
                                         <tr class="">
                                         <td><?php echo $n;?></td>
+                                        <td><?php echo $row["fechaCreacion"];?></td>
                                             <td><?php echo traduce_id($row["idUsuario"],"usuarios", "usuarios");?></td>
                                             <td><?php echo $row["entidad"];?></td>
                                             <td><?php echo $row["identificador"];?></td>
                                             <td><?php echo $row["accion"];?></td>
-                                            <td><?php echo $row["fechaCreacion"];?></td>
+                                            
                                             
                                         </tr>  
                                         <?php $n++;}?>                                      

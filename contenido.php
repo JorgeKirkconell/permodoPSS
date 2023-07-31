@@ -20,6 +20,18 @@ if(isset($_GET['modulo']) and $_GET['modulo']=="principal"){
 	include "tipo_mantenimientos.php";
 }	else if(isset($_GET['modulo']) and $_GET['modulo']=="unidadMedida"){
 	include "unidad_medida.php";
+} 	else if(isset($_GET['modulo']) and $_GET['modulo']=="colaborador"){
+	include "colaborador.php";
+} 	else if(isset($_GET['modulo']) and $_GET['modulo']=="usuarios"){
+	include "usuarios.php";
+} 	else if(isset($_GET['modulo']) and $_GET['modulo']=="cotizaciones"){
+	include "cotizaciones.php";
+} 	else if(isset($_GET['modulo']) and $_GET['modulo']=="equipos"){
+	include "equipos.php";
+} 	else if(isset($_GET['modulo']) and $_GET['modulo']=="solicitudes"){
+	include "solicitudes.php";
+}	else if(isset($_GET['modulo']) and $_GET['modulo']=="logout"){
+	include "logout.php";
 }
 
 

@@ -1,0 +1,28 @@
+- Cambiar forma de menu ()
+- 
+
+
+
+
+
+--------------------------
+División de permisos a usuarios
+
+
+Crear solicitudes de compra
+Crear solicitudes de prestamo
+Mantenimientos a equipos
+Aprobar/denegar solicitudes de compra
+Aprobar/denegar solicitudes de prestamo
+Gestión de equipos (Ingresar, editar)
+Gestión de usuarios (Ingresar, editar)
+Gestión de colaboradores (Ingresar, editar)
+Gestión de entidades de control
+Reporteria
+
+Gerencia
+Solo lectura
+Crear solicitudes de prestamo
+Aprobar/denegar solicitudes de compra
+Reporteria
+

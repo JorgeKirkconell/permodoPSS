@@ -10,7 +10,6 @@ if(isset($_GET['guardar'])){
 	//tomamos los parametros para almacenar la data
   $nombreTipo  = $db->quote($_GET['nombreTipo']);
 	$descripcion  = $db->quote($_GET['descripcion']);
-	$activo = $db->quote($_GET['activo']);
   $usuarioc = $_SESSION['id'];
 
   $query = "INSERT INTO tiporam(tipo, descripcion, fechaCreacion, usuarioCreacion) values($nombreTipo, $descripcion, NOW(),'$usuarioc')";
@@ -75,7 +74,7 @@ if(isset($_GET['guardar'])){
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                         <button class="btn btn-success notika-btn-success" onclick="guarda_nombreTipo();">Guardar</button>
-                                        <button class="btn btn-danger notika-btn-success">Cancelar</button>
+                                        <button class="btn btn-danger notika-btn-success" onclick="cancelar();">Cancelar</button>
                                     </div>
                                 </div>
                             </div>
@@ -95,8 +94,8 @@ if(isset($_GET['guardar'])){
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Tipo de Usuario</th>
-                                            <th>Observaciones</th>
+                                            <th>Tipo de RAM</th>
+                                            <th>Descripción</th>
                                             
                                             <th>Acciones</th>
                                         </tr>
@@ -116,13 +115,12 @@ if(isset($_GET['guardar'])){
                                         ?>
                                         <tr class="">
                                             <td><?php echo $n;?></td>
-                                            <td><?php echo $row["nombreTipo"];?></td>
+                                            <td><?php echo $row["tipo"];?></td>
                                             <td><?php echo $row["descripcion"];?></td>
-                                            <td><?php echo traduce_id($row["activo"],"activoinactivo", "estado");?></td>
                                             <td>
                                                 
                                 <a class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg" title="Editar " onclick="editar_nombreTipo(<?php echo $row['id'];?>);"><i class="notika-icon notika-edit"></i></a>                            
-                                <a class="btn btn-warning cyan-icon-notika btn-reco-mg btn-button-mg" title="Activar / Desactivar" onclick="activar_nombreTipo(<?php echo $row['id'].",".$row['activo'];?>);"><i class="notika-icon notika-checked"></i></a>
+                               
                                 <a class="btn btn-danger cyan-icon-notika btn-reco-mg btn-button-mg" title="Eliminar" onclick="eliminar_nombreTipo(<?php echo $row['id'];?>);" ><i class="notika-icon notika-close"></i></a>
                                             </td>
                                         </tr>  
@@ -163,7 +161,7 @@ if(isset($_GET['editar'])){
                                         </div>
                                         <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                                             <div class="nk-int-st">
-                                                <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Nombre del tipo de RAM" value="<?php echo $datos->nombreTipo;?>">
+                                                <input type="text" class="form-control input-sm" id="nombreTipo" name="nombreTipo" placeholder="Nombre del tipo de RAM" value="<?php echo $datos->tipo;?>">
                                                 <input type="hidden" name="id" id="id" value="<?php echo $datos->id;?>">
                                             </div>
                                         </div>
@@ -184,19 +182,7 @@ if(isset($_GET['editar'])){
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-example-int form-horizental mg-t-15">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-                                            <label class="hrzn-fm">Activo</label>
-                                        </div>
-                                        <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
-                                            <div class="bootstrap-select fm-cmp-mg">
-                                                <?php llena_combo("activo", "activoinactivo", "estado",$datos->activo);?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                          >
                             </div>
                             <div class="form-example-int mg-t-15">
                                 <div class="row">
@@ -204,7 +190,7 @@ if(isset($_GET['editar'])){
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                         <button class="btn btn-success notika-btn-success" onclick="actualiza_nombreTipo();">Guardar</button>
-                                        <button class="btn btn-danger notika-btn-success">Cancelar</button>
+                                        <button class="btn btn-danger notika-btn-success" onclick="cancelar();">Cancelar</button>
                                     </div>
                                 </div>
                             </div>
@@ -224,8 +210,8 @@ if(isset($_GET['editar'])){
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Tipo de Usuario</th>
-                                            <th>Observaciones</th>
+                                            <th>Tipo de RAM</th>
+                                            <th>Descripción</th>
                                         
                                             <th>Acciones</th>
                                         </tr>
@@ -245,13 +231,13 @@ if(isset($_GET['editar'])){
                                         ?>
                                         <tr class="">
                                             <td><?php echo $n;?></td>
-                                            <td><?php echo $row["nombreTipo"];?></td>
+                                            <td><?php echo $row["tipo"];?></td>
                                             <td><?php echo $row["descripcion"];?></td>
-                                            <td><?php echo traduce_id($row["activo"],"activoinactivo", "estado");?></td>
+                                            
                                             <td>
                                                 
                                 <a class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg" title="Editar " onclick="editar_nombreTipo(<?php echo $row['id'];?>);"><i class="notika-icon notika-edit"></i></a>                            
-                                <a class="btn btn-warning cyan-icon-notika btn-reco-mg btn-button-mg" title="Activar / Desactivar" onclick="activar_nombreTipo(<?php echo $row['id'].",".$row['activo'];?>);"><i class="notika-icon notika-checked"></i></a>
+                               
                                 <a class="btn btn-danger cyan-icon-notika btn-reco-mg btn-button-mg" title="Eliminar" onclick="eliminar_nombreTipo(<?php echo $row['id'];?>);" ><i class="notika-icon notika-close"></i></a>
                                             </td>
                                         </tr>  
@@ -273,14 +259,12 @@ if(isset($_GET['actualizar'])){
 	$id = $db->quote($_GET['id']);$nid =($_GET['id']);$usuarioc = $_SESSION['id'];
   $nombreTipo = $db->quote($_GET['nombreTipo']);
 	$descripcion = $db->quote($_GET['descripcion']);
-	$activo = $db->quote($_GET['activo']);
   $usuarioc = $_SESSION['id'];
 
 	$query = "
 		UPDATE tiporam set
-    nombreTipo = $nombreTipo,
+    tipo = $nombreTipo,
 		descripcion = $descripcion,
-		activo = $activo, 
     fechaEdicion = NOW(),
     usuarioEdicion = $usuarioc
 		where id = $id;
@@ -345,7 +329,7 @@ if(isset($_GET['actualizar'])){
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <button class="btn btn-success notika-btn-success" onclick="guarda_nombreTipo();">Guardar</button>
-                                    <button class="btn btn-danger notika-btn-success">Cancelar</button>
+                                    <button class="btn btn-danger notika-btn-success" onclick="cancelar();">Cancelar</button>
                                 </div>
                             </div>
                         </div>
@@ -365,8 +349,8 @@ if(isset($_GET['actualizar'])){
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Tipo de Usuario</th>
-                                        <th>Observaciones</th>
+                                        <th>Tipo de RAM</th>
+                                        <th>Descripción</th>
                                         
                                         <th>Acciones</th>
                                     </tr>
@@ -386,13 +370,13 @@ if(isset($_GET['actualizar'])){
                                     ?>
                                     <tr class="">
                                         <td><?php echo $n;?></td>
-                                        <td><?php echo $row["nombreTipo"];?></td>
+                                        <td><?php echo $row["tipo"];?></td>
                                         <td><?php echo $row["descripcion"];?></td>
-                                        <td><?php echo traduce_id($row["activo"],"activoinactivo", "estado");?></td>
+                                        
                                         <td>
                                             
                             <a class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg" title="Editar " onclick="editar_nombreTipo(<?php echo $row['id'];?>);"><i class="notika-icon notika-edit"></i></a>                            
-                            <a class="btn btn-warning cyan-icon-notika btn-reco-mg btn-button-mg" title="Activar / Desactivar" onclick="activar_nombreTipo(<?php echo $row['id'].",".$row['activo'];?>);"><i class="notika-icon notika-checked"></i></a>
+                           
                             <a class="btn btn-danger cyan-icon-notika btn-reco-mg btn-button-mg" title="Eliminar" onclick="eliminar_nombreTipo(<?php echo $row['id'];?>);" ><i class="notika-icon notika-close"></i></a>
                                         </td>
                                     </tr>  
@@ -468,7 +452,7 @@ if(isset($_GET['activar'])){
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <button class="btn btn-success notika-btn-success" onclick="guarda_nombreTipo();">Guardar</button>
-                                    <button class="btn btn-danger notika-btn-success">Cancelar</button>
+                                    <button class="btn btn-danger notika-btn-success" onclick="cancelar();">Cancelar</button>
                                 </div>
                             </div>
                         </div>
@@ -488,8 +472,8 @@ if(isset($_GET['activar'])){
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Tipo de Usuario</th>
-                                        <th>Observaciones</th>
+                                        <th>Tipo de RAM</th>
+                                        <th>Descripción</th>
                                         
                                         <th>Acciones</th>
                                     </tr>
@@ -511,11 +495,11 @@ if(isset($_GET['activar'])){
                                         <td><?php echo $n;?></td>
                                         <td><?php echo $row["nombreTipo"];?></td>
                                         <td><?php echo $row["descripcion"];?></td>
-                                        <td><?php echo traduce_id($row["activo"],"activoinactivo", "estado");?></td>
+                                        
                                         <td>
                                             
                             <a class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg" title="Editar " onclick="editar_nombreTipo(<?php echo $row['id'];?>);"><i class="notika-icon notika-edit"></i></a>                            
-                            <a class="btn btn-warning cyan-icon-notika btn-reco-mg btn-button-mg" title="Activar / Desactivar" onclick="activar_nombreTipo(<?php echo $row['id'].",".$row['activo'];?>);"><i class="notika-icon notika-checked"></i></a>
+                           
                             <a class="btn btn-danger cyan-icon-notika btn-reco-mg btn-button-mg" title="Eliminar" onclick="eliminar_nombreTipo(<?php echo $row['id'];?>);" ><i class="notika-icon notika-close"></i></a>
                                         </td>
                                     </tr>  
@@ -593,7 +577,7 @@ if(isset($_GET['desactivar'])){
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <button class="btn btn-success notika-btn-success" onclick="guarda_nombreTipo();">Guardar</button>
-                                    <button class="btn btn-danger notika-btn-success">Cancelar</button>
+                                    <button class="btn btn-danger notika-btn-success" onclick="cancelar();">Cancelar</button>
                                 </div>
                             </div>
                         </div>
@@ -613,8 +597,8 @@ if(isset($_GET['desactivar'])){
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Tipo de Usuario</th>
-                                        <th>Observaciones</th>
+                                        <th>Tipo de RAM</th>
+                                        <th>Descripción</th>
                                         
                                         <th>Acciones</th>
                                     </tr>
@@ -636,11 +620,11 @@ if(isset($_GET['desactivar'])){
                                         <td><?php echo $n;?></td>
                                         <td><?php echo $row["nombreTipo"];?></td>
                                         <td><?php echo $row["descripcion"];?></td>
-                                        <td><?php echo traduce_id($row["activo"],"activoinactivo", "estado");?></td>
+                                        
                                         <td>
                                             
                             <a class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg" title="Editar " onclick="editar_nombreTipo(<?php echo $row['id'];?>);"><i class="notika-icon notika-edit"></i></a>                            
-                            <a class="btn btn-warning cyan-icon-notika btn-reco-mg btn-button-mg" title="Activar / Desactivar" onclick="activar_nombreTipo(<?php echo $row['id'].",".$row['activo'];?>);"><i class="notika-icon notika-checked"></i></a>
+                           
                             <a class="btn btn-danger cyan-icon-notika btn-reco-mg btn-button-mg" title="Eliminar" onclick="eliminar_nombreTipo(<?php echo $row['id'];?>);" ><i class="notika-icon notika-close"></i></a>
                                         </td>
                                     </tr>  
@@ -718,7 +702,7 @@ if(isset($_GET['eliminar'])){
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <button class="btn btn-success notika-btn-success" onclick="guarda_nombreTipo();">Guardar</button>
-                                    <button class="btn btn-danger notika-btn-success">Cancelar</button>
+                                    <button class="btn btn-danger notika-btn-success" onclick="cancelar();">Cancelar</button>
                                 </div>
                             </div>
                         </div>
@@ -738,8 +722,8 @@ if(isset($_GET['eliminar'])){
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Tipo de Usuario</th>
-                                        <th>Observaciones</th>
+                                        <th>Tipo de RAM</th>
+                                        <th>Descripción</th>
                                         
                                         <th>Acciones</th>
                                     </tr>
@@ -761,11 +745,11 @@ if(isset($_GET['eliminar'])){
                                         <td><?php echo $n;?></td>
                                         <td><?php echo $row["nombreTipo"];?></td>
                                         <td><?php echo $row["descripcion"];?></td>
-                                        <td><?php echo traduce_id($row["activo"],"activoinactivo", "estado");?></td>
+                                        
                                         <td>
                                             
                             <a class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg" title="Editar " onclick="editar_nombreTipo(<?php echo $row['id'];?>);"><i class="notika-icon notika-edit"></i></a>                            
-                            <a class="btn btn-warning cyan-icon-notika btn-reco-mg btn-button-mg" title="Activar / Desactivar" onclick="activar_nombreTipo(<?php echo $row['id'].",".$row['activo'];?>);"><i class="notika-icon notika-checked"></i></a>
+                           
                             <a class="btn btn-danger cyan-icon-notika btn-reco-mg btn-button-mg" title="Eliminar" onclick="eliminar_nombreTipo(<?php echo $row['id'];?>);" ><i class="notika-icon notika-close"></i></a>
                                         </td>
                                     </tr>  

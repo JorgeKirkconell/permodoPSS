@@ -86,7 +86,7 @@ if(isset($_GET['guardar'])){
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                         <button class="btn btn-success notika-btn-success" onclick="guarda_nombreTipo();">Guardar</button>
-                                        <button class="btn btn-danger notika-btn-success">Cancelar</button>
+                                        <button class="btn btn-danger notika-btn-success" onclick="cancelar();">Cancelar</button>
                                     </div>
                                 </div>
                             </div>
@@ -215,7 +215,7 @@ if(isset($_GET['editar'])){
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                         <button class="btn btn-success notika-btn-success" onclick="actualiza_nombreTipo();">Guardar</button>
-                                        <button class="btn btn-danger notika-btn-success">Cancelar</button>
+                                        <button class="btn btn-danger notika-btn-success" onclick="cancelar();">Cancelar</button>
                                     </div>
                                 </div>
                             </div>
@@ -367,7 +367,7 @@ if(isset($_GET['actualizar'])){
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <button class="btn btn-success notika-btn-success" onclick="guarda_nombreTipo();">Guardar</button>
-                                    <button class="btn btn-danger notika-btn-success">Cancelar</button>
+                                    <button class="btn btn-danger notika-btn-success" onclick="cancelar();">Cancelar</button>
                                 </div>
                             </div>
                         </div>
@@ -501,7 +501,7 @@ if(isset($_GET['activar'])){
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <button class="btn btn-success notika-btn-success" onclick="guarda_nombreTipo();">Guardar</button>
-                                    <button class="btn btn-danger notika-btn-success">Cancelar</button>
+                                    <button class="btn btn-danger notika-btn-success" onclick="cancelar();">Cancelar</button>
                                 </div>
                             </div>
                         </div>
@@ -637,7 +637,7 @@ if(isset($_GET['desactivar'])){
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <button class="btn btn-success notika-btn-success" onclick="guarda_nombreTipo();">Guardar</button>
-                                    <button class="btn btn-danger notika-btn-success">Cancelar</button>
+                                    <button class="btn btn-danger notika-btn-success" onclick="cancelar();">Cancelar</button>
                                 </div>
                             </div>
                         </div>
@@ -773,7 +773,7 @@ if(isset($_GET['eliminar'])){
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <button class="btn btn-success notika-btn-success" onclick="guarda_nombreTipo();">Guardar</button>
-                                    <button class="btn btn-danger notika-btn-success">Cancelar</button>
+                                    <button class="btn btn-danger notika-btn-success" onclick="cancelar();">Cancelar</button>
                                 </div>
                             </div>
                         </div>
